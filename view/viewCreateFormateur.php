@@ -19,8 +19,8 @@
                 <label class="form-label mt-1">Login : </label>
                 <input type="text" name="login" class="form-control">    
                 <label class="form-label mt-1">Mot de passe : </label>
-                <input type="text" name="mdp" class="form-control">
-                <input type="submit" value="créer" class="btn btn-primary mt-4 align-self-end">   
+                <input type="password" name="mdp" class="form-control">
+                <input type="text" value="créer" class="btn btn-primary mt-4 align-self-end">   
             </form>
         </div>
     </div>    
