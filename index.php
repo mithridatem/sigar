@@ -1,36 +1,69 @@
 <?php    
+    
     //vue
     include('view/viewConnexion.php');
     //model
     include('model/utilisateur.php');
     //ajout util
     include('utils/testConnexion.php');
-    if(isset($_GET['error']) == 1)
-    {   $test2 = "login incorrect";
+    if(isset($_GET['nomdperror']))
+    {  
+        $test4 = "Veuiller saisir un mot de passe !!!";
         echo '<div class="alert  alert-warning" role="alert"></div>
         </div>';
         echo '<script>            
             let divToast = document.querySelector(".alert")
-            divToast.innerHTML = "'.$test2.'"
-        </script>';     
-        //echo '<script>alert("mot de passe incorrect !!!")</script>';
+            divToast.innerHTML = "'.$test4.'"
+        </script>';       
     }
-    else if(isset($_GET['error']) == 2)
-    {   $test1 = "le compte n\existe pas";
+    if(isset($_GET['logerror']))
+    {  
+        $test0 = "Veuiller saisir un login !!!";
+        echo '<div class="alert  alert-warning" role="alert"></div>
+        </div>';
+        echo '<script>            
+            let divToast = document.querySelector(".alert")
+            divToast.innerHTML = "'.$test0.'"
+        </script>';
+        //echo '<script>alert("le compte n\'existe pas !!!")</script>';        
+    }
+    if(isset($_GET['connect']))
+    {   session_start();
+        $test = "connecté !!!!!!!!";
+        echo '<div class="alert  alert-warning" role="alert"></div>
+        </div>';
+        echo '<script>            
+            let divToast = document.querySelector(".alert")
+            divToast.innerHTML = "'.$test.'"
+        </script>';
+        if(isset($_SESSION['connected'])){
+            echo 'connected';
+            echo '<br>';
+            //test affichage du nom du compte
+            echo ''.$_SESSION['nom'].'';
+        }
+        else{
+            echo 'pas de connection fait chier !!!';
+        } 
+    }
+    if(isset($_GET['mdperror']))
+    {   $test1 = "mot de passe incorrect!!!!!!!!!!!!!!!!!";
         echo '<div class="alert  alert-warning" role="alert"></div>
         </div>';
         echo '<script>            
             let divToast = document.querySelector(".alert")
             divToast.innerHTML = "'.$test1.'"
-        </script>';
-        //echo '<script>alert("le compte n\'existe pas !!!")</script>';
+        </script>';       
     }
-    else{
+    if(isset($_GET['cpterror']))
+    {   $test2 = "le compte n'existe pas !!!!!!!!!!!!!!!!!!!!";
+        echo '<div class="alert  alert-warning" role="alert"></div>
+        </div>';
         echo '<script>            
             let divToast = document.querySelector(".alert")
-            divToast.innerHTML = ""
+            divToast.innerHTML = "'.$test2.'"
         </script>';
-        //echo '<script>alert("le compte n\'existe pas !!!")</script>';
-    }  
-    
+        //echo '<script>alert("le compte n\'existe pas !!!")</script>';        
+    }
+
 ?>

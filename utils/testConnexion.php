@@ -3,7 +3,7 @@
     function testConnexion(){
         if(isset($_POST['login']) AND isset($_POST['mdp']) 
         AND !empty($_POST['login']) AND !empty($_POST['mdp']))
-        {
+        {            
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
             $nom = "";
@@ -17,57 +17,80 @@
             //récupération du mdp utilisateur
             $mdp = $util->getMdp();
             try
-            {
+            {   
                 //connexion à la base de données
                 include('utils/connectBdd.php');
                 //requete pour stocker le contenu de toute la table
-                $reponse = $bdd->query('SELECT * FROM utilisateur WHERE login_user = "'.$login.'" AND mdp_user="'.$mdp.'"');
+                $reponse = $bdd->query('SELECT * FROM utilisateur WHERE login_user = "'.$login.'"');
                 //boucle pour parcourir et afficher le contenu de chaque ligne de la table
                 while ($donnees = $reponse->fetch())
                 {   
-                    //test si le login et le mot de passe sont valide si ok affichage du login et du password
-                    if($login == $donnees['login_user'] AND $mdp == $donnees['mdp_user'])
+                    //test si le login existe
+                    if($login == $donnees['login_user'])
+                    {   //création de la variable $loginok si le login existe
+                        $loginok=1;                           
+                    }                               
+                }
+                //test si le login n'existe pas
+                if(!isset($loginok))
+                {
+                    header("Location: index.php?cpterror");
+                }
+                //test si le login existe vérification du mot de passe
+                if(isset($loginok))
+                {   
+                    //connexion à la base de données
+                    include('utils/connectBdd.php');
+                    //requete pour stocker le contenu de toute la table
+                    $reponse = $bdd->query('SELECT * FROM utilisateur WHERE login_user = "'.$login.'" AND mdp_user="'.$mdp.'"');
+                    //boucle pour parcourir et afficher le contenu de chaque ligne de la table
+                    while ($donnees = $reponse->fetch())
                     {   
-                        $nomUser = $donnees['nom_user'];
-                        $prenom= $donnees['prenom_user'];
-                        $logreq = $donnees['login_user'];
-                        $mdpreq = $donnees['mdp_user'];
-                        
-                        //stockage de l'id utilisateur
-                        $idutilsat = $donnees['id_user'];
-                        //$_SESSION['id']= $idutilsat;
-                        //echo "login = $login et le mdp = $mdp";
-                        session_destroy();
-                        session_start();
-                        $_SESSION['login'] = $logreq;
-                        $_SESSION['mdp'] = $mdpreq;
-                        $_SESSION['nom'] = $nomUser;
-                        $_SESSION['id'] = $idutilsat;
-                        $_SESSION['connected'] = true;
-                        echo '<br>';
-                        echo 'login connecté : '.$_SESSION['login'];
-                        echo '<br>';
-                        echo 'mot de passe connecté : '.$_SESSION['mdp'];
-                        echo '<br>';
-                        echo 'nom connecté : '.$_SESSION['nom'];
-                        echo '<br>';
-                        echo 'id connecté : '.$_SESSION['id'];
+                        //test si le login et le mot de passe sont valide si ok affichage du login et du password
+                        if($login == $donnees['login_user'] AND $mdp == $donnees['mdp_user'])
+                        {   
+                            $nomUser = $donnees['nom_user'];
+                            $prenom= $donnees['prenom_user'];
+                            $logreq = $donnees['login_user'];
+                            $mdpreq = $donnees['mdp_user'];
+                                
+                            //stockage de l'id utilisateur
+                            $idutilsat = $donnees['id_user'];
+                            session_start();
+                            $_SESSION['login'] = $logreq;
+                            $_SESSION['mdp'] = $mdpreq;
+                            $_SESSION['nom'] = $nomUser;
+                            $_SESSION['id'] = $idutilsat;
+                            $_SESSION['connected'] = true;
+                            $connect=1;
+                            //redirection si connecté
+                            header("Location: index.php?connect");                                                       
+                        }
+                                                                             
                     }
-                               
                 }
-                //le compte n'existe pas !!!
-               if(!isset($logreq)){
-                    header("Location: index.php?error=1");
+                //test si le login existe et le mot de passe est incorrect
+                if(isset($loginok) AND !isset($connect))
+                {
+                    header("Location: index.php?mdperror");
                 }
-                //mot de passe incorrect !!!
-                if(!isset($mdpreq)){
-                    header("Location: index.php?error=1");
-                }                           
+                                  
             }
             catch(Exception $e)
             {   //affichage d'une exception
                 die('Erreur : '.$e->getMessage());
             } 
         }
+        //test si le champ login est vide
+        if(isset($_POST['login']) AND empty($_POST['login']))
+        {
+            header("Location: index.php?logerror");
+        }
+        //test si le champ mot de passe est vide
+        if(isset($_POST['mdp']) AND empty($_POST['mdp']))
+        {
+            header("Location: index.php?nomdperror");
+        }
+
     }
 ?>
