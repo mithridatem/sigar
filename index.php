@@ -25,7 +25,6 @@
             let divToast = document.querySelector(".alert")
             divToast.innerHTML = "'.$test0.'"
         </script>';
-        //echo '<script>alert("le compte n\'existe pas !!!")</script>';        
     }
     if(isset($_GET['connect']))
     {   session_start();
@@ -39,7 +38,7 @@
         if(isset($_SESSION['connected'])){
             echo 'connected';
             echo '<br>';
-            //test affichage du nom du compte
+            //test affichage du nom du compte connecté
             echo ''.$_SESSION['nom'].'';
         }
         else{
@@ -62,8 +61,7 @@
         echo '<script>            
             let divToast = document.querySelector(".alert")
             divToast.innerHTML = "'.$test2.'"
-        </script>';
-        //echo '<script>alert("le compte n\'existe pas !!!")</script>';        
+        </script>';    
     }
 
 ?>
