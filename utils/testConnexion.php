@@ -4,13 +4,13 @@
         if(isset($_POST['login']) AND isset($_POST['mdp']) 
         AND !empty($_POST['login']) AND !empty($_POST['mdp']))
         {            
-            $login = $_POST['login'];
+            $login = htmlspecialchars($_POST['login']);
             $mdp = $_POST['mdp'];
             $nom = "";
             $prenom="";       
             //création d'un nouvel objet utilisateur  
             $util = new Utilisateur($nom, $prenom,$login, $mdp);
-            //fonction encodage mot de passe
+            //fonction encodage mot de passe et suppression injection sql
             $mdp = $util->cryptMdp($mdp);
             //enregistrement du mot de passe
             $util->setMdp($mdp);                        
