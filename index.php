@@ -6,6 +6,7 @@
     include('model/utilisateur.php');
     //ajout util
     include('utils/testConnexion.php');
+    //test mot de passe vide
     if(isset($_GET['nomdperror']))
     {  
         $test4 = "Veuiller saisir un mot de passe !!!";
@@ -16,6 +17,7 @@
             divToast.innerHTML = "'.$test4.'"
         </script>';       
     }
+    //test login vide
     if(isset($_GET['logerror']))
     {  
         $test0 = "Veuiller saisir un login !!!";
@@ -26,8 +28,10 @@
             divToast.innerHTML = "'.$test0.'"
         </script>';
     }
+    //test connexion
     if(isset($_GET['connect']))
-    {   session_start();
+    {   
+        session_start();
         $test = "connecté !!!!!!!!";
         echo '<div class="alert  alert-warning" role="alert"></div>
         </div>';
@@ -38,13 +42,14 @@
         if(isset($_SESSION['connected'])){
             echo 'connected';
             echo '<br>';
-            //test affichage du nom du compte connecté
+            //test affichage du nom du compte connecté (debug)
             echo ''.$_SESSION['nom'].'';
         }
         else{
-            echo 'pas de connection fait chier !!!';
+            echo 'pas de connection !!!';
         } 
     }
+    //test mot de passe incorrect
     if(isset($_GET['mdperror']))
     {   $test1 = "mot de passe incorrect!!!!!!!!!!!!!!!!!";
         echo '<div class="alert  alert-warning" role="alert"></div>
@@ -54,6 +59,7 @@
             divToast.innerHTML = "'.$test1.'"
         </script>';       
     }
+    //test compte incorrect
     if(isset($_GET['cpterror']))
     {   $test2 = "le compte n'existe pas !!!!!!!!!!!!!!!!!!!!";
         echo '<div class="alert  alert-warning" role="alert"></div>
