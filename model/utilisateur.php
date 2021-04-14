@@ -2,6 +2,7 @@
     class Utilisateur
     {   
         //attributs :
+        protected $id_user;
         protected $nom;
         protected $prenom;
         protected $login;
@@ -18,6 +19,16 @@
         /*-----------------------------------------------------
                 Getter and Setter :
         -----------------------------------------------------*/
+        //getter id_user
+        public function getIdUser()
+        {
+            return $this->id_user;
+        }
+        //setter login
+        public function setIdUser($new_id_user)
+        {
+            $this->id_user = $new_id_user;
+        }
         //getter login
         public function getLogin()
         {
