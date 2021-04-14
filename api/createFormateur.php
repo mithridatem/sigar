@@ -27,29 +27,15 @@
         //vérification de l'objet utilisateur
         //var_dump($util);
         try 
-        {   
+        {      
             //insertion de l'utilisateur en BDD 
-            $util->createUser($nom, $prenom, $login, $mdp, $bdd);
+            $util->createUser2($nom, $prenom, $login, $mdp, $bdd); 
+                      
         }
         catch(Exception $e)
         {   //affichage d'une exception
             die('Erreur : '.$e->getMessage());
         }            
     }
-    //sinon
-    else
-    {   
-        //variable nom utilisateur à vide
-        $nom = "";
-        //variable prenom utilisateur à vide
-        $prenom = "";
-        //variable login à vide
-        $login = "";
-        //variable mot de passe à vide
-        $mdp = "";        
-        //nouvel utilisateur  
-        $util = new Utilisateur($nom, $prenom, $login, $mdp);
-        //affichage des erreurs
-        $util->showError($nom, $prenom, $login, $mdp);        
-    }
+    
 ?>       

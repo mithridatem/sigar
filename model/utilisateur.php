@@ -109,15 +109,90 @@
             'mdp_user' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", $mdp),
             'id_role' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", 1),                                                                   
             ));
-            $test = 'le compte : '.$nom.' '.$prenom.' à était ajouté !!!';
+            $mess = 'le compte : '.$nom.' '.$prenom.' à était ajouté !!!';
+            //echo 'console.log("message erreur")';
             echo '<div class="alert  alert-warning" role="alert"></div>
                     </div>';
-            echo '<script>            
-            let divToast = document.querySelector(".alert")
-            divToast.innerHTML = "'.$test.'"
+            echo '<script>
+                console.log("message erreur")
+                let divToast = document.querySelector(".alert")            
+                divToast.innerHTML = "'.$mess.'"
             </script>';
             //fermeture de la connexion à la bdd
             $req->closeCursor();                          
-        } 
+        }
+        public function createUser2($nom, $prenom, $login, $mdp, $bdd){                                 
+            //connexion à la base de données
+            include('utils/connectBdd.php');
+            //requete pour stocker le contenu de toute la table
+            $reponse = $bdd->query('SELECT * FROM utilisateur WHERE login_user = "'.$login.'" LIMIT 1');
+            //boucle pour parcourir et afficher le contenu de chaque ligne de la table
+            while ($donnees = $reponse->fetch())
+            {   
+                //test si le login existe
+                if($login == $donnees['login_user'])
+                {   
+                    $userExist=1;
+                                            
+                }                                              
+            }
+            if(isset($userExist)){
+                header("Location: createFormateur.php?cpterror"); 
+            }
+            if(!isset($userExist)){
+                //connexion à la base de données
+                include('utils/connectBdd.php');
+                //préparation de la requête SQL
+                $req = $bdd->prepare('INSERT INTO utilisateur(nom_user, prenom_user, login_user, mdp_user, id_role) 
+                VALUES (:nom_user, :prenom_user, :login_user, :mdp_user, :id_role)');
+                //éxécution de la requête SQL
+                $req->execute(array(
+                'nom_user' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", $nom),
+                'prenom_user' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", $prenom),
+                'login_user' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", $login),
+                'mdp_user' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", $mdp),
+                'id_role' => iconv("UTF-8", "ISO-8859-1//TRANSLIT", 1),                                                                   
+                ));
+                $mss = 'le compte : '.$nom.' '.$prenom.' à était ajouté !!!';
+                //echo 'console.log("message erreur")';
+                echo '<div class="alert  alert-warning" role="alert"></div>
+                    </div>';
+                echo '<script>
+                console.log("message erreur")
+                let divToast = document.querySelector(".alert")             
+                divToast.innerHTML = "'.$mss.'"
+                </script>';
+                //fermeture de la connexion à la bdd
+                $req->closeCursor();    
+            } 
+                                  
+        }
+        //fonction vérification existence utilisateur en BDD 
+        public function getUser($login, $bdd){
+            //connexion à la base de données
+            include('utils/connectBdd.php');
+            //requete pour stocker le contenu de toute la table
+            $reponse = $bdd->query('SELECT * FROM utilisateur WHERE login_user = "'.$login.'" LIMIT 1');
+            //boucle pour parcourir et afficher le contenu de chaque ligne de la table
+            while ($donnees = $reponse->fetch())
+            {   
+                //test si le login existe
+                if($login == $donnees['login_user'])
+                {   
+                    $userExist=1;
+                    $test = 'le compte : '.$donnees['nom_user'].' existe déja !!!';
+                    echo '<div class="alert  alert-warning" role="alert"></div>
+                    </div>';
+                    echo '<script>            
+                        let divToast = document.querySelector(".alert")
+                        divToast.innerHTML = "'.$test.'"
+                    </script>';
+                    //fermeture de la connexion à la bdd
+                    $reponse->closeCursor();                         
+                }                               
+            }
+            
+            
+        }
     }
 ?>

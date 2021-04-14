@@ -26,8 +26,7 @@
             let divToast = document.querySelector(".alert")
             divToast.innerHTML = "'.$test4.'"
         </script>';       
-    }
-    
+    }    
     //test connexion
     if(isset($_GET['connect']))
     {   
