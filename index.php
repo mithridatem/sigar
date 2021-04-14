@@ -1,22 +1,10 @@
 <?php    
-    
     //vue
     include('view/viewConnexion.php');
     //model
     include('model/utilisateur.php');
     //ajout util
     include('utils/testConnexion.php');
-    //test mot de passe vide
-    if(isset($_GET['nomdperror']))
-    {  
-        $test4 = "Veuiller saisir un mot de passe !!!";
-        echo '<div class="alert  alert-warning" role="alert"></div>
-        </div>';
-        echo '<script>            
-            let divToast = document.querySelector(".alert")
-            divToast.innerHTML = "'.$test4.'"
-        </script>';       
-    }
     //test login vide
     if(isset($_GET['logerror']))
     {  
@@ -28,6 +16,18 @@
             divToast.innerHTML = "'.$test0.'"
         </script>';
     }
+    //test mot de passe vide
+    if(isset($_GET['nomdperror']))
+    {  
+        $test4 = "Veuiller saisir un mot de passe !!!";
+        echo '<div class="alert  alert-warning" role="alert"></div>
+        </div>';
+        echo '<script>            
+            let divToast = document.querySelector(".alert")
+            divToast.innerHTML = "'.$test4.'"
+        </script>';       
+    }
+    
     //test connexion
     if(isset($_GET['connect']))
     {   
