@@ -88,7 +88,13 @@
         }             
         //fonction affichage des erreurs 
         public function showError($nom, $prenom, $login, $mdp){
-            echo 'Veuillez saisir un nom, un prénom, un login et un mot de passe';
+            $mess = 'Veuillez saisir un nom, un prénom, un login et un mot de passe';
+            echo '<div class="alert  alert-warning" role="alert"></div>
+                    </div>';
+            echo '<script>            
+            let divToast = document.querySelector(".alert")
+            divToast.innerHTML = "'.$mess.'"
+            </script>';            
         }
         //fonction insertion d'un utilisateur en BDD
         public function createUser($nom, $prenom, $login, $mdp, $bdd){                                 
