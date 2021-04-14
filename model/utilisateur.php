@@ -132,8 +132,7 @@
                 //test si le login existe
                 if($login == $donnees['login_user'])
                 {   
-                    $userExist=1;
-                                            
+                    $userExist=1;                                            
                 }                                              
             }
             if(isset($userExist)){
@@ -164,8 +163,7 @@
                 </script>';
                 //fermeture de la connexion à la bdd
                 $req->closeCursor();    
-            } 
-                                  
+            }                                  
         }
         //fonction vérification existence utilisateur en BDD 
         public function getUser($login, $bdd){

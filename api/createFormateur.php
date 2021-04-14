@@ -16,8 +16,6 @@
         $mdp = $util->cryptMdp($mdp);
         //enregistrement du mot de passe
         $util->setMdp($mdp);          
-        //fonction affichage du compte utilisateur créé.
-        //$util->showUser($nom, $prenom, $login, $mdp);
         //récupération du nom utilisateur 
         $nom = $util->getNom();
         //récupération du login utilisateur
@@ -25,7 +23,6 @@
         //récupération du mot de passe utilisateur
         $mdp = $util->getMdp();
         //vérification de l'objet utilisateur
-        //var_dump($util);
         try 
         {      
             //insertion de l'utilisateur en BDD 
