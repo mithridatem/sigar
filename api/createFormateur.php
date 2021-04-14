@@ -29,7 +29,7 @@
         try 
         {   
             //insertion de l'utilisateur en BDD 
-            $util->createUser($nom, $prenom, $login, $mdp, $bdd);     
+            $util->createUser($nom, $prenom, $login, $mdp, $bdd);
         }
         catch(Exception $e)
         {   //affichage d'une exception
@@ -50,6 +50,6 @@
         //nouvel utilisateur  
         $util = new Utilisateur($nom, $prenom, $login, $mdp);
         //affichage des erreurs
-        //$util->showError($nom, $prenom, $login, $mdp);        
+        $util->showError($nom, $prenom, $login, $mdp);        
     }
 ?>       
