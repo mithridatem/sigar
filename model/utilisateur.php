@@ -132,7 +132,7 @@
                 //test si le login existe
                 if($login == $donnees['login_user'])
                 {   
-                    $userExist=1;                                            
+                    $userExist=1;         qfscdjhazehoersgedjgfkop                                   
                 }                                              
             }
             if(isset($userExist)){
