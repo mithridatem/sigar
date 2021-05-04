@@ -17,7 +17,7 @@
             $this->id_role =1;            
         }
         /*-----------------------------------------------------
-                Getter and Setter :
+                        Getter and Setter :
         -----------------------------------------------------*/
         //getter id_user
         public function getIdUser()
@@ -72,7 +72,9 @@
         public function setId_role($new_id_role){
             $this->id_role = $new_id_role;
         }
-
+        /*-----------------------------------------------------
+                            Fonctions :
+        -----------------------------------------------------*/
         //fonction encodage mot de passe en md5
         public function cryptMdp($mdp){
             //suppression injection sql en js
